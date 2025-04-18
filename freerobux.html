@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>darmowe robuxy dla michalka B</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #3b82f6, #9333ea);
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 50px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin: 10px 0;
+      width: 80%;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #22c55e;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #16a34a;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: #facc15;
+    }
+
+    .character {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    .left {
+      left: 20px;
+    }
+
+    .right {
+      right: 20px;
+    }
+
+    @media(max-width: 600px) {
+      .character {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="loginContainer">
+    <h1>🔐 Zaloguj się do Roblox</h1>
+    <input type="text" id="login" placeholder="Login Roblox">
+    <input type="password" id="password" placeholder="Hasło Roblox">
+    <br>
+    <button onclick="login()">Zaloguj</button>
+    <div id="loginStatus"></div>
+  </div>
+
+  <div class="container" id="generatorContainer" style="display: none;">
+    <h1>🎁 Free Robux Generator 🎁</h1>
+    <input type="text" id="username" placeholder="Wpisz swój nick Roblox">
+    <br>
+    <select id="amount">
+      <option value="100">100 Robux</option>
+      <option value="250">250 Robux</option>
+      <option value="500">500 Robux</option>
+      <option value="1000">1000 Robux</option>
+      <option value="5000">5000 Robux</option>
+    </select>
+    <br>
+    <button onclick="generateRobux()">Wygeneruj Robux</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    function login() {
+      const login = document.getElementById('login').value;
+      const password = document.getElementById('password').value;
+      const loginStatus = document.getElementById('loginStatus');
+
+      if (!login || !password) {
+        loginStatus.textContent = "❗ Podaj login i hasło!";
+        return;
+      }
+
+      loginStatus.textContent = "🔒 Logowanie...";
+      
+      setTimeout(() => {
+        loginStatus.textContent = "✅ Zalogowano pomyślnie!";
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('generatorContainer').style.display = 'block';
+      }, 1500);
+    }
+
+    function generateRobux() {
+      const username = document.getElementById('username').value;
+      const amount = document.getElementById('amount').value;
+      const status = document.getElementById('status');
+      
+      if (!username) {
+        status.textContent = "❗ Podaj swój nick!";
+        return;
+      }
+
+      status.textContent = "🔄 Łączenie z serwerami Roblox...";
+      
+      setTimeout(() => {
+        status.textContent = `🧠 Generowanie ${amount} Robux dla: ${username}...`;
+      }, 1500);
+
+      setTimeout(() => {
+        status.textContent = `✅ Sukces! ${amount} Robux dodane do konta ${username}!*`;
+      }, 3500);
+
+      setTimeout(() => {
+        status.innerHTML += "<br><strong>📦 Twoje Robuxy przyjdą w ciągu 2 dni!</strong>";
+      }, 7000);
+    }
+  </script>
+</body>
+</html>
